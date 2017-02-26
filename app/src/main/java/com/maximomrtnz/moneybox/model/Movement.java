@@ -3,7 +3,11 @@ package com.maximomrtnz.moneybox.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.maximomrtnz.moneybox.commons.DateUtils;
+
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Maxi on 2/16/2017.
@@ -12,7 +16,7 @@ import java.util.Date;
 public class Movement implements Parcelable{
 
     private String category;
-    private Date date;
+    private Long date;
     private Double amount;
     private String type;
     private String description;
@@ -42,11 +46,11 @@ public class Movement implements Parcelable{
         this.category = category;
     }
 
-    public Date getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 
@@ -86,7 +90,7 @@ public class Movement implements Parcelable{
         parcel.writeString(description);
         parcel.writeString(type);
         parcel.writeDouble(amount);
-        parcel.writeLong(date.getTime());
+        parcel.writeLong(date);
 
     }
 
@@ -95,7 +99,7 @@ public class Movement implements Parcelable{
         description = parcel.readString();
         type = parcel.readString();
         amount = parcel.readDouble();
-        date = new Date(parcel.readLong());
+        date = parcel.readLong();
     }
 
     public static final Parcelable.Creator CREATOR =

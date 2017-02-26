@@ -14,6 +14,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatDrawableManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.maximomrtnz.moneybox.R;
 import com.maximomrtnz.moneybox.dialogs.MovementDialogFragment;
 import com.maximomrtnz.moneybox.fragments.HomeFragment;
@@ -96,10 +98,10 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Create new movement
                 showMovementDialog(new Movement());
             }
         });
-
 
         //get firebase auth instance
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -135,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
             CURRENT_TAG = TAG_HOME;
             loadHomeFragment();
         }
+
     }
 
     /***

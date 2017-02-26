@@ -16,16 +16,12 @@
         android:textSize="18sp"
         />
 
-    <EditText
-        android:id="@+id/type"
+    <Spinner
+        android:id="@+id/type_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:singleLine="true"
-        android:imeOptions="actionDone"
-        android:hint="Task Description"
-        android:inputType="textCapWords"
-        />
+        android:imeOptions="actionDone"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -45,20 +41,19 @@
         android:singleLine="true"
         android:imeOptions="actionDone"
         android:hint="Task Description"
-        android:inputType="textCapWords"
-        />
+        android:inputType="numberDecimal"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
-        android:text="@string/description"
+        android:text="@string/category"
         android:textStyle="bold"
         android:textSize="18sp"
         />
 
-    <EditText
+    <Spinner
         android:id="@+id/category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,6 +76,28 @@
 
     <EditText
         android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:hint="Task Description"
+        android:inputType="textCapWords"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="@string/date"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/date"
+        android:editable="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

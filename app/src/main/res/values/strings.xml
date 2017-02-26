@@ -82,5 +82,31 @@
     <string name="description">Description</string>
     <string name="date">Date</string>
     <string name="movement">Movement</string>
+    <string name="amount_is_required">Amount is required!</string>
+
+    <string-array name="type_array">
+        <item>Income</item>
+        <item>Expense</item>
+    </string-array>
+
+    <string-array name="expense_categories_array">
+        <item>Drinks</item>
+        <item>Food</item>
+        <item>Fuel</item>
+        <item>Grocery</item>
+        <item>Highway</item>
+        <item>Hotel</item>
+        <item>Merchandise</item>
+        <item>Others</item>
+        <item>Tips</item>
+        <item>Transport</item>
+    </string-array>
+
+    <string-array name="income_categories_array">
+        <item>Loan</item>
+        <item>Salary</item>
+        <item>Sales</item>
+    </string-array>
+
 
 </resources>
