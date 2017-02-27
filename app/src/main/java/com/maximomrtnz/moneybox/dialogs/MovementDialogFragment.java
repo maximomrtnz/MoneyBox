@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.maximomrtnz.moneybox.R;
 import com.maximomrtnz.moneybox.commons.DateUtils;
+import com.maximomrtnz.moneybox.commons.LayoutUtils;
 import com.maximomrtnz.moneybox.model.Movement;
 import com.maximomrtnz.moneybox.pickers.DatePickerFragment;
 
@@ -148,6 +149,10 @@ public class MovementDialogFragment extends DialogFragment implements DatePicker
                         mMovement.setCategory(mCategory.getSelectedItem().toString());
                         mMovement.setType(mType.getSelectedItem().toString());
 
+                        if(mMovement.getDate()==null){
+                            mMovement.setDate(DateUtils.getCurrentTime());
+                        }
+
                         ((MovementDialogListener) getActivity()).onPositiveButtonClicked(mMovement);
 
                         dialog.dismiss();
@@ -186,14 +191,7 @@ public class MovementDialogFragment extends DialogFragment implements DatePicker
 
         int categoryList = (mType.getSelectedItemPosition()==0)?R.array.income_categories_array:R.array.expense_categories_array;
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),categoryList, android.R.layout.simple_spinner_item);
-
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Apply the adapter to the spinner
-        mCategory.setAdapter(adapter);
+        LayoutUtils.setSpinner(getContext(),mCategory,categoryList);
 
     }
 

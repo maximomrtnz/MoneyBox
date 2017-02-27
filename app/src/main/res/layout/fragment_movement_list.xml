@@ -4,14 +4,58 @@
     android:layout_height="match_parent"
     tools:context="com.maximomrtnz.moneybox.fragments.MovementListFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/movement_list"
+    <LinearLayout
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/add_task_wrapper"
-        android:layout_marginBottom="12dp"
-        android:orientation="vertical"
-        android:scrollbars="none"/>
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/months"
+                android:layout_weight="0.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog">
+            </Spinner>
+
+            <Spinner
+                android:id="@+id/years"
+                android:layout_weight="0.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog">
+            </Spinner>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/movement_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/add_task_wrapper"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical"
+            android:scrollbars="none"/>
+
+        <!-- Other views -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </LinearLayout>
 </FrameLayout>

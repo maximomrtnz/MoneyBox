@@ -168,9 +168,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         // just close the navigation drawer
         if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
             drawer.closeDrawers();
-
-            // show or hide the fab button
-            toggleFab();
             return;
         }
 
@@ -195,9 +192,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         if (mPendingRunnable != null) {
             mHandler.post(mPendingRunnable);
         }
-
-        // show or hide the fab button
-        toggleFab();
 
         //Closing drawer on item click
         drawer.closeDrawers();
@@ -388,14 +382,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    // show or hide the fab
-    private void toggleFab() {
-        if (navItemIndex == 0)
-            fab.show();
-        else
-            fab.hide();
     }
 
     @Override

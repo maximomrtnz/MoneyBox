@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,9 +23,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.maximomrtnz.moneybox.R;
 import com.maximomrtnz.moneybox.adapters.MovementRecyclerViewAdapter;
+import com.maximomrtnz.moneybox.commons.LayoutUtils;
 import com.maximomrtnz.moneybox.model.Movement;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -43,6 +50,9 @@ public class MovementListFragment extends Fragment {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabase;
     private DatabaseReference mMovementsReference;
+    private TextView mAmount;
+    private Spinner mMonths;
+    private Spinner mYears;
 
     public MovementListFragment() {
         // Required empty public constructor
@@ -81,6 +91,17 @@ public class MovementListFragment extends Fragment {
         mRecyclerViewAdapter = new MovementRecyclerViewAdapter(getContext(),mMovements);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
 
+        mAmount = (TextView)rootView.findViewById(R.id.amount);
+
+        mMonths = (Spinner)rootView.findViewById(R.id.months);
+        mYears = (Spinner)rootView.findViewById(R.id.years);
+
+        // Load months into months spinner
+        LayoutUtils.setSpinner(getContext(),mMonths,R.array.months_array);
+
+        // Set current month
+        mMonths.setSelection(Calendar.getInstance().get(Calendar.MONTH));
+
         return rootView;
     }
 
@@ -106,9 +127,15 @@ public class MovementListFragment extends Fragment {
 
                 mMovements.clear();
 
+                Double amount = 0d;
+
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    mMovements.add(ds.getValue(Movement.class));
+                    Movement movement = ds.getValue(Movement.class);
+                    amount+=movement.getAmount();
+                    mMovements.add(movement);
                 }
+
+                mAmount.setText(amount.toString());
 
                 mRecyclerViewAdapter.notifyDataSetChanged();
 

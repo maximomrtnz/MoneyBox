@@ -20,6 +20,10 @@ import java.util.List;
 
 public class MovementRecyclerViewAdapter extends RecyclerView.Adapter<MovementRecyclerViewAdapter.MovementViewHolder> {
 
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_ITEM = 1;
+    private static final int TYPE_FOOTER = 2;
+
     private List<Movement> mMovements;
     private Context mContext;
 

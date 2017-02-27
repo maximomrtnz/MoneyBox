@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:imeOptions="actionDone"/>
+        android:imeOptions="actionDone"
+        android:spinnerMode="dialog"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -62,6 +63,7 @@
         android:imeOptions="actionDone"
         android:hint="Task Description"
         android:inputType="textCapWords"
+        android:spinnerMode="dialog"
         />
 
     <TextView

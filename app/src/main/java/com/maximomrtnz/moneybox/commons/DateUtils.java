@@ -24,4 +24,9 @@ public class DateUtils {
         return format.format(calendar.getTime());
     }
 
+    public static Long getCurrentTime(){
+        Calendar calendar = new GregorianCalendar();
+        return calendar.getTimeInMillis();
+    }
+
 }
