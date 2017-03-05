@@ -1,5 +1,6 @@
 package com.maximomrtnz.moneybox.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,9 +14,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatDrawableManager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -406,13 +409,32 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     @Override
     public void onPositiveButtonClicked(Movement movement) {
         // Save data into Firebase
-        mDatabase.child("users").child(mFirebaseUser.getUid()).child("movements").push().setValue(movement);
+        if (TextUtils.isEmpty(movement.getId())) { // Insert
+            mDatabase.child("users").child(mFirebaseUser.getUid()).child("movements").push().setValue(movement);
+        }else{ // Update
+            mDatabase.child("users").child(mFirebaseUser.getUid()).child("movements").child(movement.getId()).setValue(movement);
+        }
     }
 
     public void showMovementDialog(Movement movement) {
 
         DialogFragment newFragment = MovementDialogFragment.newInstance(movement);
         newFragment.show(getSupportFragmentManager(), "movement_dialog");
+
+    }
+
+    public void deleteMovement(final Movement movement){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(R.string.confirm_delete)
+        .setIcon(android.R.drawable.ic_dialog_alert)
+        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int whichButton) {
+                mDatabase.child("users").child(mFirebaseUser.getUid()).child("movements").child(movement.getId()).removeValue();
+            }})
+
+        .setNegativeButton(android.R.string.no, null).show();
 
     }
 }

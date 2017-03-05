@@ -42,6 +42,7 @@
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
 
+    <string name="confirm_delete">Are you sure to delete this record?</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -121,7 +122,11 @@
         <item>October</item>
         <item>November</item>
         <item>December</item>
-        <item>All</item>
+    </string-array>
+
+    <string-array name="movement_options_dialog_array">
+        <item>Edit</item>
+        <item>Delete</item>
     </string-array>
 
 </resources>

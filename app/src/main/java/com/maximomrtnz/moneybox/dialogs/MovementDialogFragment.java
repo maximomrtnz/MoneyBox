@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -69,21 +70,15 @@ public class MovementDialogFragment extends DialogFragment implements DatePicker
         View v = inflater.inflate(R.layout.fragment_movement_dialog, null);
 
         mAmount = (EditText) v.findViewById(R.id.amount);
+
         mType = (Spinner) v.findViewById(R.id.type_spinner);
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),R.array.type_array, android.R.layout.simple_spinner_item);
-
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Apply the adapter to the spinner
-        mType.setAdapter(adapter);
+        LayoutUtils.setSpinner(getContext(),mType,R.array.type_array,mMovement.getType());
 
         mType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                setCategoryList();
+                setCategoryList(null);
             }
 
             @Override
@@ -93,6 +88,7 @@ public class MovementDialogFragment extends DialogFragment implements DatePicker
         });
 
         mDescription = (EditText) v.findViewById(R.id.description);
+
         mCategory = (Spinner) v.findViewById(R.id.category);
 
         mDate = (TextView) v.findViewById(R.id.date);
@@ -112,6 +108,11 @@ public class MovementDialogFragment extends DialogFragment implements DatePicker
 
         builder.setTitle(getActivity().getString(R.string.movement));
 
+        if(!TextUtils.isEmpty(mMovement.getId())){
+            mAmount.setText(mMovement.getAmount().toString());
+            mDescription.setText(mMovement.getDescription());
+            setCategoryList(mMovement.getCategory());
+        }
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -187,11 +188,11 @@ public class MovementDialogFragment extends DialogFragment implements DatePicker
 
     }
 
-    private void setCategoryList(){
+    private void setCategoryList(String initialValue){
 
         int categoryList = (mType.getSelectedItemPosition()==0)?R.array.income_categories_array:R.array.expense_categories_array;
 
-        LayoutUtils.setSpinner(getContext(),mCategory,categoryList);
+        LayoutUtils.setSpinner(getContext(),mCategory,categoryList,initialValue);
 
     }
 

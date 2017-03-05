@@ -5,14 +5,15 @@
     tools:context="com.maximomrtnz.moneybox.fragments.MovementListFragment">
 
     <LinearLayout
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/date_wrapper">
 
             <Spinner
                 android:id="@+id/months"
@@ -35,17 +36,10 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/movement_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_above="@+id/add_task_wrapper"
+            android:layout_height="0dp"
             android:layout_marginBottom="12dp"
             android:orientation="vertical"
-            android:scrollbars="none"/>
-
-        <!-- Other views -->
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:scrollbars="none"
             android:layout_weight="1"/>
 
         <LinearLayout

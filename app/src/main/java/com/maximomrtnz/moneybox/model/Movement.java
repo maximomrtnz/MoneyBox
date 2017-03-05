@@ -20,6 +20,15 @@ public class Movement implements Parcelable{
     private Double amount;
     private String type;
     private String description;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     /**
      * Standard basic constructor for non-parcel
@@ -86,6 +95,7 @@ public class Movement implements Parcelable{
     @Override
     public void writeToParcel(Parcel parcel, int i) {
 
+        parcel.writeString(id);
         parcel.writeString(category);
         parcel.writeString(description);
         parcel.writeString(type);
@@ -95,6 +105,7 @@ public class Movement implements Parcelable{
     }
 
     private void readFromParcel(Parcel parcel) {
+        id = parcel.readString();
         category = parcel.readString();
         description = parcel.readString();
         type = parcel.readString();

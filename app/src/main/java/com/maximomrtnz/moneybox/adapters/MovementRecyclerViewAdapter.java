@@ -1,6 +1,8 @@
 package com.maximomrtnz.moneybox.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,16 +22,18 @@ import java.util.List;
 
 public class MovementRecyclerViewAdapter extends RecyclerView.Adapter<MovementRecyclerViewAdapter.MovementViewHolder> {
 
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_ITEM = 1;
-    private static final int TYPE_FOOTER = 2;
-
     private List<Movement> mMovements;
     private Context mContext;
+    private static RecyclerViewClickListener mItemListener;
 
-    public MovementRecyclerViewAdapter(Context context, List<Movement> movements) {
+    public interface RecyclerViewClickListener {
+        void onRecyclerViewListClicked(Movement movement);
+    }
+
+    public MovementRecyclerViewAdapter(Context context, List<Movement> movements,RecyclerViewClickListener itemListener) {
         mMovements = movements;
         mContext = context;
+        mItemListener = itemListener;
     }
 
     @Override
@@ -47,6 +51,7 @@ public class MovementRecyclerViewAdapter extends RecyclerView.Adapter<MovementRe
     public void onBindViewHolder(MovementViewHolder holder, int position) {
         Movement movement = getItem(position);
 
+        holder.mMovement = movement;
         holder.mMovementCategory.setText(movement.getCategory());
         holder.mMovementDescription.setText(movement.getDescription());
         holder.mMovementAmount.setText(movement.getAmount().toString());
@@ -69,17 +74,18 @@ public class MovementRecyclerViewAdapter extends RecyclerView.Adapter<MovementRe
         return  mMovements.get(position);
     }
 
-    public static class MovementViewHolder extends RecyclerView.ViewHolder {
+    public static class MovementViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView mMovementCategory;
         TextView mMovementDescription;
         TextView mMovementAmount;
         TextView mMovementDate;
         ImageView mMovementType;
+        Movement mMovement;
 
         public MovementViewHolder(View itemView){
             super(itemView);
-
+            itemView.setOnClickListener(this);
             mMovementDate = (TextView)itemView.findViewById(R.id.date);
             mMovementAmount = (TextView)itemView.findViewById(R.id.amount);
             mMovementCategory = (TextView)itemView.findViewById(R.id.category);
@@ -88,6 +94,13 @@ public class MovementRecyclerViewAdapter extends RecyclerView.Adapter<MovementRe
 
         }
 
+        @Override
+        public void onClick(View view) {
+            view.setTag(mMovement);
+            if(mItemListener!=null){
+                mItemListener.onRecyclerViewListClicked(mMovement);
+            }
+        }
     }
 
 }
